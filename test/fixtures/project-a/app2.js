@@ -1,4 +1,4 @@
 /* eslint-disable */
-import 'ing-web';
+import 'lib-a';
 import 'feature-b';
 
