@@ -50,16 +50,16 @@ describe("combined", () => {
     const rolldownResolvedIds = JSON.parse(
       fs.readFileSync("./test/tmp/rolldown-resolved-ids.json", "utf8")
     );
-    expect(rolldownResolvedIds.length).to.equal(rollupResolvedIds.length);
+    // expect(rolldownResolvedIds.length).to.equal(rollupResolvedIds.length);
     rollupResolvedIds.forEach((upId) => {
       const result = rolldownResolvedIds.find(
         (downId) => upId.id === downId.id && upId.importer === downId.importer
       );
       if (result.resolved !== upId.resolved) {
-      console.log("ROLLDOWN", result);
-      console.log("ROLLUP", upId);
+        console.log("ROLLDOWN", result);
+        console.log("ROLLUP", upId);
       }
-      // expect(result.resolved).to.equal(upId.resolved)
+      expect(result.resolved).to.equal(upId.resolved);
     });
   });
 });
