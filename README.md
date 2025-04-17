@@ -4,6 +4,8 @@
 
 Run `npm test` several times, it doesn't always fail, but eventually it will.
 
+![issue](./issue.png)
+
 ## Creating npm dependency tree
 
 ```
