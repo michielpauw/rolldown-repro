@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-function incorrectIdPlugin(rollupName, config = {}) {
+function incorrectIdPlugin(rollupName) {
   const resolvedIds = [];
   return {
     name: "incorrect-id",
