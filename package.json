@@ -1,0 +1,20 @@
+{
+  "name": "rolldown-repro",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Reproduction of rolldown issue",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/restrictResolvePlugin.test.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "chai": "^4.3.6",
+    "mocha": "^11.1.0",
+    "prettier": "^3.5.3",
+    "rolldown": "1.0.0-beta.7",
+    "rollup": "^4.4.1"
+  }
+}
