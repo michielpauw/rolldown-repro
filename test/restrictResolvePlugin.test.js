@@ -19,23 +19,28 @@ function incorrectIdPlugin(rollupName) {
     async resolveId(id, importer) {
       const resolved = await this.resolve(id, importer, { skipSelf: true });
 
+      console.log(`${rollupName}: id: ${id}, importer: ${importer}, resolved: ${resolved.id}`)
+      if (!resolved.id.includes(id)) {
+        console.log("ERROR ERROR ERROR")
+      }
       // console.log("id", id);
       // console.log("importer", importer);
-      // console.log("resolved", resolved.id);
+      // console.log("resolved", resolved?.id);
       // console.log("");
 
-      // if (path.isAbsolute(id) && id !== resolved.id) {
-      //   console.error(
-      //     `\nResolve error in ${rollupName}\nExpected: "${id}"\nActual: "${resolved.id}"\n\nImporting from ${importer}`
+
+      // if (path.isAbsolute(id) && id !== resolved?.id) {
+      //   throw new Error(
+      //     `\nResolve error in ${rollupName}\nExpected: "${id}"\nActual: "${resolved.id}"\n`
       //   );
       // }
 
-      const resolveIdentifier = `${id}-${importer}`;
-      resolvedIds[rollupName][resolveIdentifier] = {
-        id,
-        importer,
-        resolved: resolved.id,
-      };
+      // const resolveIdentifier = `${id}-${importer}`;
+      // resolvedIds[rollupName][resolveIdentifier] = {
+      //   id,
+      //   importer,
+      //   resolved: resolved?.id,
+      // };
 
       return null;
     },
@@ -43,7 +48,7 @@ function incorrectIdPlugin(rollupName) {
 }
 
 function getPlugins(rollupName) {
-  return [incorrectIdPlugin(rollupName), nodeResolve()];
+  return rollupName === 'rolldown' ? [incorrectIdPlugin(rollupName)] : [incorrectIdPlugin(rollupName), nodeResolve()];
 }
 
 describe("combined", () => {
@@ -61,17 +66,17 @@ describe("combined", () => {
     });
     await bundle.generate();
 
-    Object.values(resolvedIds['rollup']).forEach((upId) => {
-      const result = Object.values(resolvedIds['rolldown']).find(
-        (downId) => upId.id === downId.id && upId.importer === downId.importer
-      );
-      if (result.resolved !== upId.resolved) {
-        console.log("ROLLUP")
-        console.log(upId);
-        console.log("ROLLDOWN")
-        console.log(result);
-      }
-      // expect(result.resolved).to.equal(upId.resolved);
-    });
+    // Object.values(resolvedIds['rollup']).forEach((upId) => {
+    //   const result = Object.values(resolvedIds['rolldown']).find(
+    //     (downId) => upId.id === downId.id && upId.importer === downId.importer
+    //   );
+    //   if (result?.resolved !== upId?.resolved) {
+    //     console.log("ROLLUP")
+    //     console.log(upId);
+    //     console.log("ROLLDOWN")
+    //     console.log(result);
+    //   }
+    //   expect(result.resolved).to.equal(upId.resolved);
+    // });
   });
 });

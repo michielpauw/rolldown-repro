@@ -1,5 +1,9 @@
 # Repro
 
+## Fixed
+
+Turns out we were erroneously also calling `nodeResolve`. After removing this, we managed to get the Rolldown build work as expected.
+
 ## How to reproduce
 
 Run `npm test` several times, it doesn't always fail, but eventually it will.
