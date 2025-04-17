@@ -10,29 +10,6 @@ function getPlugins(rollupName) {
   return [incorrectIdPlugin(rollupName), nodeResolve()];
 }
 
-// describe("rollup", () => {
-//   describe("restrictResolvePlugin", () => {
-//     it("should generate error when too old lib-a versions are used", async () => {
-//       const bundle = await rollup({
-//         input: resolvePath("app.js"),
-//         plugins: getPlugins("rollup"),
-//       });
-//     });
-//   });
-// });
-
-// describe("rolldown", () => {
-//   describe("restrictResolvePlugin", () => {
-//     it("should generate error when too old lib-a versions are used", async () => {
-//       const bundle = await rolldown({
-//         input: resolvePath("app.js"),
-//         plugins: getPlugins("rolldown"),
-//       });
-//       await bundle.generate();
-//     });
-//   });
-// });
-
 describe("combined", () => {
   it("should resolve IDs in the same way between Rollup and Rolldown", async () => {
     await rollup({
@@ -50,7 +27,8 @@ describe("combined", () => {
     const rolldownResolvedIds = JSON.parse(
       fs.readFileSync("./test/tmp/rolldown-resolved-ids.json", "utf8")
     );
-    // expect(rolldownResolvedIds.length).to.equal(rollupResolvedIds.length);
+
+    // add some comments here
     rollupResolvedIds.forEach((upId) => {
       const result = rolldownResolvedIds.find(
         (downId) => upId.id === downId.id && upId.importer === downId.importer
